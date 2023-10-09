@@ -1,3 +1,2 @@
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-chksdk
+chkdsk
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Restricted
