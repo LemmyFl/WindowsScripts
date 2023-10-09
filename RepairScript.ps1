@@ -32,4 +32,4 @@ Function Check-RunAsAdministrator()
 Check-RunAsAdministrator
  
 #Place your script here.
-write-host "Welcome"
+chksdk
