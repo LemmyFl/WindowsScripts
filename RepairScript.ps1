@@ -1,1 +1,1 @@
-write "Hello World"
+chkdsk
