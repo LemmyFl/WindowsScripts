@@ -1,1 +1,1 @@
-chkdsk
+write-host "Hello World"
