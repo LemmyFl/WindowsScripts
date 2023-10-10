@@ -67,6 +67,6 @@ else
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-#CheckFilesystem
-CheckDISM
+CheckFilesystem
+#CheckDISM
 #CheckSFC
