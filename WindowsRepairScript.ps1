@@ -1,4 +1,4 @@
-#### <Start-Process powershell -ArgumentList "-ep bypass -c (iex (irm https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/RepairScript.ps1))" -Verb RunAs> ### 
+#### <Start-Process powershell -ArgumentList "-ep bypass -c (iex (irm https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1))" -Verb RunAs> ### 
 
 #requires -version 2
 <#
