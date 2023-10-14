@@ -19,7 +19,7 @@
 
 .NOTES
   Version:        0.0.2
-  Author:         <Lennart Heidtmann>
+  Author:         <LemmyFL>
   Creation Date:  <13.10.2023>
   Purpose/Change: Initial script development
   
