@@ -1,6 +1,3 @@
-#### <Start-Process powershell -ArgumentList "-ep bypass -c (iex (irm https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1))" -Verb RunAs> ### 
-
-#requires -version 2
 <#
 .SYNOPSIS
   <Repair windows Image and Check Filesystem>
@@ -8,23 +5,11 @@
 .DESCRIPTION
   <Chkdsk + DISM + SFC>
 
-.PARAMETER <Parameter_Name>
-    <Brief description of parameter input required. Repeat this attribute if required>
-
-.INPUTS
-  <Inputs if any, otherwise state None>
-
-.OUTPUTS
-  <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
-
 .NOTES
   Version:        0.0.2
   Author:         <LemmyFL>
   Creation Date:  <13.10.2023>
-  Purpose/Change: Initial script development
-  
-.EXAMPLE
-  <Example goes here. Repeat this attribute for more than one example>
+
 #>
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
