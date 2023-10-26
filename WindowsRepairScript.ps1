@@ -107,7 +107,7 @@ if ($LASTEXITCODE -ne 0)
 
 else
 {
-    Write-Output "No Error found on drive $driveLetters"
+    Write-Output "No Error found on drives"
     }
 }
 }
