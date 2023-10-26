@@ -1,3 +1,4 @@
+#requires -version 2
 <#
 .SYNOPSIS
   <Repair windows Image and Check Filesystem>
@@ -5,11 +6,23 @@
 .DESCRIPTION
   <Chkdsk + DISM + SFC>
 
-.NOTES
-  Version:        0.0.2
-  Author:         <LemmyFL>
-  Creation Date:  <13.10.2023>
+.PARAMETER <Parameter_Name>
+    <Brief description of parameter input required. Repeat this attribute if required>
 
+.INPUTS
+  <Inputs if any, otherwise state None>
+
+.OUTPUTS
+  <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
+
+.NOTES
+  Version:        0.0.1
+  Author:         <Lennart Heidtmann>
+  Creation Date:  <10.10.2023>
+  Purpose/Change: Initial script development
+  
+.EXAMPLE
+  <Example goes here. Repeat this attribute for more than one example>
 #>
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
