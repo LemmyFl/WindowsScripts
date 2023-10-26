@@ -17,8 +17,8 @@
 
 .NOTES
   Version:        0.0.1
-  Author:         <Lennart Heidtmann>
-  Creation Date:  <10.10.2023>
+  Author:         <LemmyFL>
+  Creation Date:  <26.10.2023>
   Purpose/Change: Initial script development
   
 .EXAMPLE
