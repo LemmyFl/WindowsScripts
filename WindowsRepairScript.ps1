@@ -1,33 +1,9 @@
-#requires -version 2
 <#
-.SYNOPSIS
-  <Repair windows Image and Check Filesystem>
-
-.DESCRIPTION
-  <Chkdsk + DISM + SFC>
-
-.PARAMETER <Parameter_Name>
-    <Brief description of parameter input required. Repeat this attribute if required>
-
-.INPUTS
-  <Inputs if any, otherwise state None>
-
-.OUTPUTS
-  <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
-
 .NOTES
-  Version:        0.0.1
+  Version:        Beta 0.0.2
   Author:         <LemmyFL>
-  Creation Date:  <26.10.2023>
-  Purpose/Change: Initial script development
-  
-.EXAMPLE
-  <Example goes here. Repeat this attribute for more than one example>
+  Creation Date:  <11.12.2023>
 #>
-
-#---------------------------------------------------------[Initialisations]--------------------------------------------------------
-
-#----------------------------------------------------------[Declarations]----------------------------------------------------------
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
@@ -44,19 +20,19 @@ Function CheckDISM()
     }
     else
     {
-    # Run DISM to restore the image Health
-    Write-Host "Error found and reparing";
-    $void= DISM /online /cleanup-image /restorehealth
+      # Run DISM to restore the image Health
+      Write-Host "Error found and reparing";
+      $void= DISM /online /cleanup-image /restorehealth
 
-    # Check if the restore was successful
-    if ($LASTEXITCODE -eq "0") 
-    {
-        Write-Output "Health has been restored successfully."
-    }
-    else
-    {
+      # Check if the restore was successful
+      if ($LASTEXITCODE -eq "0") 
+        {
+          Write-Output "Health has been restored successfully."
+        }
+        else
+        {
         Write-Output "Failed to restore health. Check the DISM logs for more information (C:\windows\logs\dism\dism.log)."
-    }
+        }
     }
 
 }
