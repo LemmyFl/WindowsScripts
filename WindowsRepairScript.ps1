@@ -1,6 +1,6 @@
 <#
 .NOTES
-  Version:        Beta 0.0.2
+  Version:        Beta 0.0.4
   Author:         <LemmyFL>
   Creation Date:  <11.12.2023>
 #>
