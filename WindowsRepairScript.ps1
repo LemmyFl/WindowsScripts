@@ -12,7 +12,7 @@ Function CheckFilesystem()
 {
 # Get a list of all drive letters on the system
 Write-Host "Filesystem and Metadata scan in progress, this may take some time..."
-$driveLetters = Get-WmiObject -Query "SELECT * FROM Win32_LogicalDisk" | ForEach-Object { $_.DeviceID }
+Get-WmiObject -Query "SELECT * FROM Win32_LogicalDisk" | ForEach-Object { $_.DeviceID } = $driveLetters
 
 # Loop through each drive and run chkdsk with
 foreach ($driveLetter in $driveLetters) {
