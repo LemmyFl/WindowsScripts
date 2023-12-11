@@ -1,6 +1,6 @@
 <#
 .NOTES
-  Version:        Beta 0.0.5
+  Version:        Beta 0.0.7
   Author:         <LemmyFL>
   Creation Date:  <11.12.2023>
 #>
@@ -12,7 +12,9 @@ Function CheckFilesystem()
 {
 # Get a list of all drive letters on the system
 Write-Host "Filesystem and Metadata scan in progress, this may take some time..."
-$driveLetters = Get-CimInstance -Query "SELECT * FROM Win32_LogicalDisk" | ForEach-Object { $_.DeviceID }
+#$driveLetters = Get-CimInstance -Query "Select * FROM Win32_LogicalDisk" | ForEach-Object { $_.DeviceID }
+$driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk
+$driveLetters | ForEach-Object { $_.DeviceID }
 
 # Loop through each drive and run chkdsk with
 foreach ($driveLetter in $driveLetters) {
