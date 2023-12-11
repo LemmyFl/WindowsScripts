@@ -1,6 +1,6 @@
 <#
 .NOTES
-  Version:        Beta 0.0.8
+  Version:        Beta 0.1.0
   Author:         <LemmyFL>
   Creation Date:  <11.12.2023>
 #>
@@ -18,7 +18,7 @@ $driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { 
 # Loop through each drive and run chkdsk
 foreach ($driveLetter in $driveLetters) {
     # Run chkdsk for every drive on the system
-    $chkdskOutput = chkdsk $driveLetter
+    $chkdskOutput = chkdsk /scan /perf $driveLetter
 
     # Check if the output of chkdsk contains an error
     if ($LASTEXITCODE -ne 0) {
