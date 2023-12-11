@@ -1,6 +1,6 @@
 <#
 .NOTES
-  Version:        Beta 0.0.7
+  Version:        Beta 0.0.8
   Author:         <LemmyFL>
   Creation Date:  <11.12.2023>
 #>
@@ -10,27 +10,21 @@
 
 Function CheckFilesystem()
 {
-# Get a list of all drive letters on the system
 Write-Host "Filesystem and Metadata scan in progress, this may take some time..."
-#$driveLetters = Get-CimInstance -Query "Select * FROM Win32_LogicalDisk" | ForEach-Object { $_.DeviceID }
-$driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk
-$driveLetters | ForEach-Object { $_.DeviceID }
 
-# Loop through each drive and run chkdsk with
+# Get a list of all drive letters on the system
+$driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { $_.DeviceID }
+
+# Loop through each drive and run chkdsk
 foreach ($driveLetter in $driveLetters) {
+    # Run chkdsk for every drive on the system
+    $chkdskOutput = chkdsk $driveLetter
 
-# Run chkdsk for every Drive on the System
-$chkdskOutput = chkdsk $driveLetter
-
-# Check if the output of chkdsk contains an Error and if wich Drive Letter
-if ($LASTEXITCODE -ne 0)
-{
-    Write-Output "chkdsk on drive $driveLetter - Error found"
-    } 
-
-else
-{
-    Write-Output "No Error found on drives"
+    # Check if the output of chkdsk contains an error
+    if ($LASTEXITCODE -ne 0) {
+        Write-Output "chkdsk on drive $driveLetter - Error found"
+    } else {
+        Write-Output "No Error found on drive $driveLetter"
     }
 }
 }
