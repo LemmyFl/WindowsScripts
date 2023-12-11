@@ -97,4 +97,5 @@ CheckDISM
 CheckSFC
 
 Stop-Transcript
+Set-ExecutionPolicy RemoteSigned
 pause
