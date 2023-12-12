@@ -4,23 +4,8 @@
   Author:         <LemmyFL>
   Creation Date:  <12.12.2023>
 #>
-
+# Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
-
-Function CheckAdmin()
-{
-  # Check if the script is running with administrative privileges
-  if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
-    {
-    Write-Host "This script requires administrative privileges. Please run the script as an administrator."
-    pause 
-    exit
-    }
-}
-
-Write-Host "Script is running with administrative privileges."
-# Rest of your script code...
-
 
 Function CheckFilesystem()
 {
@@ -37,11 +22,11 @@ foreach ($driveLetter in $driveLetters) {
     # Check if the output of chkdsk contains an error
     if ($LASTEXITCODE -ne 0) 
       {
-        Write-Output "chkdsk on drive $driveLetter - Error found"
+        Write-Host "chkdsk on drive $driveLetter - Error found"
       } 
     else 
       {
-        Write-Output "No Error found on drive $driveLetter"
+        Write-Host "No Error found on drive $driveLetter"
       }
 }
 }
@@ -103,7 +88,6 @@ Function CheckSFC()
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-CheckAdmin
 Start-Transcript -Force -path "C:\PS\Logs\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
 
 CheckFilesystem
