@@ -1,6 +1,6 @@
 <#
 .NOTES
-  Version:        Beta 00.01.00
+  Version:        Beta 00.02.00
   Author:         <LemmyFL>
   Creation Date:  <12.12.2023>
 #>
@@ -88,12 +88,12 @@ Function CheckSFC()
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-Start-Transcript -Force -path "C:\PS\Logs\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
+Write-Host "Windwos Repair Script Running"
+Start-Transcript -Force -UseMinimalHeader -path "C:\LemmyFL_Logs\WindowsRepairScript\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
 
 CheckFilesystem
 CheckDISM
 CheckSFC
 
 Stop-Transcript
-Set-ExecutionPolicy RemoteSigned
-pause
+exit
