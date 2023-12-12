@@ -1,11 +1,27 @@
 <#
 .NOTES
-  Version:        Beta 0.1.0
+  Version:        Beta 00.01.00
   Author:         <LemmyFL>
-  Creation Date:  <11.12.2023>
+  Creation Date:  <12.12.2023>
 #>
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
+
+Function CheckAdmin()
+{
+  # Check if the script is running with administrative privileges
+  if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
+    {
+    Write-Host "This script requires administrative privileges. Please run the script as an administrator."
+    pause 
+    exit
+    }
+}
+
+# Your script code goes here
+
+Write-Host "Script is running with administrative privileges."
+# Rest of your script code...
 
 
 Function CheckFilesystem()
@@ -21,11 +37,14 @@ foreach ($driveLetter in $driveLetters) {
     $chkdskOutput = chkdsk /scan /perf $driveLetter
 
     # Check if the output of chkdsk contains an error
-    if ($LASTEXITCODE -ne 0) {
+    if ($LASTEXITCODE -ne 0) 
+      {
         Write-Output "chkdsk on drive $driveLetter - Error found"
-    } else {
+      } 
+    else 
+      {
         Write-Output "No Error found on drive $driveLetter"
-    }
+      }
 }
 }
 
