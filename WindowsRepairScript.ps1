@@ -94,4 +94,5 @@ CheckDISM
 CheckSFC
 
 Stop-Transcript
+pause
 exit
