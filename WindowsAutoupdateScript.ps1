@@ -19,7 +19,7 @@ Function AskForRestart()
     {
       Write-Host "You chose not to restart. Please restart your computer at your earliest convenience."
     }
-    
+}    
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 $void = Start-Transcript -Force -path "C:\LemmyFL_Logs\WindowsAutoupdateScript\WindowsAutoupdateScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
 
