@@ -89,7 +89,7 @@ Function CheckSFC()
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
 Write-Host "Windwos Repair Script Running"
-Start-Transcript -Force -UseMinimalHeader -path "C:\LemmyFL_Logs\WindowsRepairScript\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
+Start-Transcript -Force -path "C:\LemmyFL_Logs\WindowsRepairScript\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt" -UseMinimalHeader
 
 CheckFilesystem
 CheckDISM
