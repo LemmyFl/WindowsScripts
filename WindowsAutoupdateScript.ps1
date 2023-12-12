@@ -4,7 +4,7 @@
   Author:         <LemmyFL>
   Creation Date:  <12.12.2023>
 #>
-# Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
+# Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsAutoupdateScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
 Function AskForRestart()
@@ -29,8 +29,6 @@ Function AskForRestart()
        Write-Host "No restart is required."
      }
 }
-
-
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 $void = Start-Transcript -Force -path "C:\LemmyFL_Logs\WindowsAutoupdateScript\WindowsAutoupdateScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
