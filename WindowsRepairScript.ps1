@@ -17,7 +17,7 @@ $driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { 
 # Loop through each drive and run chkdsk
 foreach ($driveLetter in $driveLetters) {
     # Run chkdsk for every drive on the system
-    $chkdskOutput = chkdsk /scan /perf $driveLetter
+    $void = chkdsk /scan /perf $driveLetter
 
     # Check if the output of chkdsk contains an error
     if ($LASTEXITCODE -ne 0) 
@@ -46,7 +46,7 @@ Function CheckDISM()
         {
         # Run DISM to restore the image Health
         Write-Host "Error found and reparing";
-        $void= DISM /online /cleanup-image /restorehealth
+        $void = DISM /online /cleanup-image /restorehealth
 
         # Check if the restore was successful
         if ($LASTEXITCODE -eq "0") 
