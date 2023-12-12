@@ -22,11 +22,11 @@ foreach ($driveLetter in $driveLetters) {
     # Check if the output of chkdsk contains an error
     if ($LASTEXITCODE -ne 0) 
       {
-        Write-Error "chkdsk on drive $driveLetter - Error found"
+        Write-Host "chkdsk on drive $driveLetter - Error found"
       } 
     else 
       {
-        Write-Error "No Error found on drive $driveLetter"
+        Write-Host "No Error found on drive $driveLetter"
       }
 }
 }
