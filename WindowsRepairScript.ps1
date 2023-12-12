@@ -65,22 +65,22 @@ Function CheckSFC()
 
     # Check if the sfc scan was without failure (Exit Code equal 0)
     if ($LASTEXITCODE -eq "0")
-    {
-    Write-Host "SFC scan - OK"
-    }
+      {
+        Write-Host "SFC scan - OK"
+      }
     else
-    {
-    Write-Host "SFC scan - Error found and reparing"
-    $void = SFC /scannow
-    }
+      {
+        Write-Host "SFC scan - Error found and reparing"
+        $void = SFC /scannow
+      }
            if ($LASTEXITCODE -eq "0")
-           {
-           Write-Host "SFC repair - OK - Health has been restored successfully"
-           }
-           else
-           {
-           Write-Host "SFC repair failed - Check the SFC logs for more information (C:\Windows\Logs\CBS\)"
-           }
+             {
+               Write-Host "SFC repair - OK - Health has been restored successfully"
+             }
+            else
+             {
+               Write-Host "SFC repair failed - Check the SFC logs for more information (C:\Windows\Logs\CBS\)"
+             }
 }
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
