@@ -24,7 +24,7 @@ foreach ($driveLetter in $driveLetters) {
       } 
     else 
       {
-        Write-Host "$driveLetter - OK"
+        Write-Host "chkdsk on drive $driveLetter - OK"
       }
 }
 }
