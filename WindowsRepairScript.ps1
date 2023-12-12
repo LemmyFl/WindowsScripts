@@ -18,8 +18,6 @@ Function CheckAdmin()
     }
 }
 
-# Your script code goes here
-
 Write-Host "Script is running with administrative privileges."
 # Rest of your script code...
 
@@ -105,6 +103,7 @@ Function CheckSFC()
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
+CheckAdmin
 Start-Transcript -Force -path "C:\PS\Logs\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
 
 CheckFilesystem
