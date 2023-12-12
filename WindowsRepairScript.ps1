@@ -89,8 +89,9 @@ Function CheckSFC()
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
+$void = Start-Transcript -Force -path "C:\LemmyFL_Logs\WindowsRepairScript\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
+
 Write-Host "Windwos Repair Script Running"
-Start-Transcript -Force -path "C:\LemmyFL_Logs\WindowsRepairScript\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
 
 CheckFilesystem
 CheckDISM
