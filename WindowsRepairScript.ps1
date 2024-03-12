@@ -2,12 +2,12 @@
 .NOTES
   Version:        Beta 00.02.00
   Author:         <LemmyFL>
-  Creation Date:  <12.12.2023>
+  Creation Date:  12.12.2023
 #>
 # Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
-Function CheckFilesystem()
+Function CheckFileSystem()
 {
 # Get a list of all drive letters on the system
 $driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { $_.DeviceID }
@@ -35,18 +35,18 @@ Function CheckDISM()
     $void = DISM /online /cleanup-image /scanhealth 
 
     # Check if DISM reported an error (Exit Code equal 0)
-    if ($LASTEXITCODE -eq "0" ) 
+    if ($LASTEXITCODE -eq 0 ) 
         {
         Write-Host "DISM scan - OK"
         }
     else
         {
         # Run DISM to restore the image Health
-        Write-Host "DISM scan - Error found and reparing";
+        Write-Host "DISM scan - Error found and repairing";
         $void = DISM /online /cleanup-image /restorehealth
 
         # Check if the restore was successful
-        if ($LASTEXITCODE -eq "0") 
+        if ($LASTEXITCODE -eq 0) 
             {
             Write-Output "DISM repair - OK - Health has been restored successfully"
             }
@@ -64,16 +64,16 @@ Function CheckSFC()
     $void = SFC /scannow
 
     # Check if the sfc scan was without failure (Exit Code equal 0)
-    if ($LASTEXITCODE -eq "0")
+    if ($LASTEXITCODE -eq 0)
       {
         Write-Host "SFC scan - OK"
       }
     else
       {
-        Write-Host "SFC scan - Error found and reparing"
+        Write-Host "SFC scan - Error found and repairing"
         $void = SFC /scannow
       }
-           if ($LASTEXITCODE -eq "0")
+           if ($LASTEXITCODE -eq 0)
              {
                Write-Host "SFC repair - OK - Health has been restored successfully"
              }
@@ -85,13 +85,11 @@ Function CheckSFC()
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-$void = Start-Transcript -Force -path "C:\LemmyFL_Logs\WindowsRepairScript\WindowsRepairScript_$(Get-Date -Format 'yyyy_MM_dd_-_HH_mm').txt"
-
 Write-Host "*Windows Repair Script Running*"
 
-CheckFilesystem
+CheckFileSystem
 CheckDISM
 CheckSFC
 
-Stop-Transcript
-exit
+Write-Host "Press any key to close..."
+$null = $host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
