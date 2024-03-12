@@ -73,6 +73,7 @@ Write-Host "Checking System File Integrity"
       }
     else
       {
+      {
         Write-Host "SFC scan - Error found and repairing"
         $void = SFC /scannow
       }
@@ -84,6 +85,7 @@ Write-Host "Checking System File Integrity"
              {
                Write-Host "SFC repair failed - Check the SFC logs for more information (C:\Windows\Logs\CBS\)"
              }
+      }
 }
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
