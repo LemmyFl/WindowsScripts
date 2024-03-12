@@ -9,6 +9,7 @@
 
 Function CheckFileSystem()
 {
+Write-Host "Checking Filesystem on Local Drives"
 # Get a list of all drive letters on the system
 $driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { $_.DeviceID }
 
@@ -31,6 +32,7 @@ foreach ($driveLetter in $driveLetters) {
 
 Function CheckDISM()
 {
+Write-Host "Checking Operating System Integrity"
     # Run DISM to scan the image for errors
     $void = DISM /online /cleanup-image /scanhealth 
 
@@ -60,6 +62,7 @@ Function CheckDISM()
 
 Function CheckSFC()
 {
+Write-Host "Checking System File Integrity"
     # Run SFC /scannow to scan the system files for corruption and missing files
     $void = SFC /scannow
 
@@ -85,7 +88,7 @@ Function CheckSFC()
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-Write-Host "*Windows Repair Script Running*"
+Write-Host "Windows Repair Script Running"
 
 CheckFileSystem
 CheckDISM
