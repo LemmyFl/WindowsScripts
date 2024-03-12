@@ -91,5 +91,8 @@ CheckFileSystem
 CheckDISM
 CheckSFC
 
-Write-Host "Press any key to close..."
-$null = $host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+Write-Host "Press ESC key to close..."
+
+do {
+    $key = $host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+} until ($key.VirtualKeyCode -eq 27)
