@@ -1,91 +1,55 @@
 <#
 .NOTES
-  Version:        Beta 00.02.00
+  Version:        Beta 00.03.00
   Author:         <LemmyFL>
   Creation Date:  12.12.2023
 #>
-# Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
+# Start-Process -FilePath powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
-Function CheckFileSystem()
-{
-Write-Host "Checking Filesystem on Local Drives"
-# Get a list of all drive letters on the system
-$driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { $_.DeviceID }
-
-# Loop through each drive and run chkdsk
-foreach ($driveLetter in $driveLetters) {
-    # Run chkdsk for every drive on the system
-    $void = chkdsk /scan /perf $driveLetter
-
-    # Check if the output of chkdsk contains an error
-    if ($LASTEXITCODE -ne 0) 
-      {
-        Write-Host "chkdsk on drive $driveLetter - Error found"
-      } 
-    else 
-      {
-        Write-Host "chkdsk on drive $driveLetter - OK"
-      }
-}
+Function CheckFileSystem {
+    Write-Host "Checking Filesystem on Local Drives"
+    $driveLetters = Get-CimInstance -ClassName Win32_LogicalDisk | ForEach-Object { $_.DeviceID }
+    foreach ($driveLetter in $driveLetters) {
+        chkdsk /scan /perf $driveLetter > $null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "chkdsk on drive $driveLetter - Error found"
+        } else {
+            Write-Host "chkdsk on drive $driveLetter - OK"
+        }
+    }
 }
 
-Function CheckDISM()
-{
-Write-Host "Checking Operating System Integrity"
-    # Run DISM to scan the image for errors
-    $void = DISM /online /cleanup-image /scanhealth 
-
-    # Check if DISM reported an error (Exit Code equal 0)
-    if ($LASTEXITCODE -eq 0 ) 
-        {
+Function CheckDISM {
+    Write-Host "Checking Operating System Integrity"
+    DISM /online /cleanup-image /scanhealth > $null
+    if ($LASTEXITCODE -eq 0) {
         Write-Host "DISM scan - OK"
+    } else {
+        Write-Host "DISM scan - Error found and repairing"
+        DISM /online /cleanup-image /restorehealth > $null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "DISM repair - OK - Health has been restored successfully"
+        } else {
+            Write-Host "DISM repair failed - Check the DISM logs for more information (C:\windows\logs\dism\)"
         }
-    else
-        {
-        # Run DISM to restore the image Health
-        Write-Host "DISM scan - Error found and repairing";
-        $void = DISM /online /cleanup-image /restorehealth
-
-        # Check if the restore was successful
-        if ($LASTEXITCODE -eq 0) 
-            {
-            Write-Output "DISM repair - OK - Health has been restored successfully"
-            }
-        else
-            {
-            Write-Output "DISM repair failed - Check the DISM logs for more information (C:\windows\logs\dism\)"
-            }
-        }
-
+    }
 }
 
-Function CheckSFC()
-{
-Write-Host "Checking System File Integrity"
-    # Run SFC /scannow to scan the system files for corruption and missing files
-    $void = SFC /scannow
-
-    # Check if the sfc scan was without failure (Exit Code equal 0)
-    if ($LASTEXITCODE -eq 0)
-      {
+Function CheckSFC {
+    Write-Host "Checking System File Integrity"
+    SFC /scannow > $null
+    if ($LASTEXITCODE -eq 0) {
         Write-Host "SFC scan - OK"
-      }
-    else
-      {
-      {
+    } else {
         Write-Host "SFC scan - Error found and repairing"
-        $void = SFC /scannow
-      }
-           if ($LASTEXITCODE -eq 0)
-             {
-               Write-Host "SFC repair - OK - Health has been restored successfully"
-             }
-            else
-             {
-               Write-Host "SFC repair failed - Check the SFC logs for more information (C:\Windows\Logs\CBS\)"
-             }
-      }
+        SFC /scannow > $null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "SFC repair - OK - Health has been restored successfully"
+        } else {
+            Write-Host "SFC repair failed - Check the SFC logs for more information (C:\Windows\Logs\CBS\)"
+        }
+    }
 }
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
