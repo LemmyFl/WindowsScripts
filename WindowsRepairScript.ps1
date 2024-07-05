@@ -62,16 +62,6 @@ Function CheckDrivers {
     Write-Host "Driver integrity check - Complete"
 }
 
-Function CheckDrivers {
-    Write-Host "Checking Driver Integrity"
-    Get-WindowsDriver -Online | ForEach-Object {
-        if (-not (Test-Path $_.OriginalFileName)) {
-            Write-Host "Driver file missing: $($_.OriginalFileName)"
-        }
-    }
-    Write-Host "Driver integrity check - Complete"
-}
-
 Function CheckMemory {
     Write-Host "Running Memory Diagnostic"
     Start-Process "mdsched.exe" -ArgumentList "/f" -Verb RunAs
