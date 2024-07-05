@@ -1,8 +1,8 @@
 <#
 .NOTES
-  Version:        Beta 00.03.00
+  Version:        Beta 001.02.00
   Author:         <LemmyFL>
-  Creation Date:  12.12.2023
+  Last Change Date:  05.07.2024
 #>
 # Start-Process -FilePath powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/main/WindowsRepairScript.ps1' -UseBasicParsing).Content }" -Verb RunAs
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
@@ -52,6 +52,32 @@ Function CheckSFC {
     }
 }
 
+Function CheckDrivers {
+    Write-Host "Checking Driver Integrity"
+    Get-WindowsDriver -Online | ForEach-Object {
+        if (-not (Test-Path $_.OriginalFileName)) {
+            Write-Host "Driver file missing: $($_.OriginalFileName)"
+        }
+    }
+    Write-Host "Driver integrity check - Complete"
+}
+
+Function CheckDrivers {
+    Write-Host "Checking Driver Integrity"
+    Get-WindowsDriver -Online | ForEach-Object {
+        if (-not (Test-Path $_.OriginalFileName)) {
+            Write-Host "Driver file missing: $($_.OriginalFileName)"
+        }
+    }
+    Write-Host "Driver integrity check - Complete"
+}
+
+Function CheckMemory {
+    Write-Host "Running Memory Diagnostic"
+    Start-Process "mdsched.exe" -ArgumentList "/f" -Verb RunAs
+    Write-Host "Memory Diagnostic scheduled - Please reboot the system to run the test"
+}
+
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
 Write-Host "Windows Repair Script Running"
@@ -59,6 +85,8 @@ Write-Host "Windows Repair Script Running"
 CheckFileSystem
 CheckDISM
 CheckSFC
+CheckDrivers
+#CheckMemory
 
 Write-Host "Press ESC key to close..."
 
