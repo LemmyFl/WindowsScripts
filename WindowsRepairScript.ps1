@@ -62,12 +62,6 @@ Function CheckDrivers {
     Write-Host "Driver integrity check - Complete"
 }
 
-Function CheckMemory {
-    Write-Host "Running Memory Diagnostic"
-    Start-Process "mdsched.exe" -ArgumentList "/f" -Verb RunAs
-    Write-Host "Memory Diagnostic scheduled - Please reboot the system to run the test"
-}
-
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
 Write-Host "Windows Repair Script Running"
@@ -76,7 +70,6 @@ CheckFileSystem
 CheckDISM
 CheckSFC
 CheckDrivers
-#CheckMemory
 
 Write-Host "Press ESC key to close..."
 
