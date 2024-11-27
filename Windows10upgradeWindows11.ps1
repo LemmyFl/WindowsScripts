@@ -4,7 +4,7 @@
   Author:         <LemmyFL>
   Last Change Date:  27.11.2024
 #>
-# Start-Process -FilePath powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(https://raw.githubusercontent.com/LemmyFl/WindowsScripts/refs/heads/main/Windows10upgradeWindow11.ps1s' -UseBasicParsing).Content }" -Verb RunAs
+# Start-Process -FilePath powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command & { $(iwr 'https://raw.githubusercontent.com/LemmyFl/WindowsScripts/refs/heads/main/Windows10upgradeWindow11.ps1' -UseBasicParsing).Content }" -Verb RunAs
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
 Function CheckIfElevated() {
