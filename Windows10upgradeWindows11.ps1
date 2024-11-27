@@ -115,7 +115,7 @@ function Start-WindowsUpdateUpgrade {
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-CheckIfElevated
+#CheckIfElevated
 Start-WindowsUpdateUpgrade
 
 
